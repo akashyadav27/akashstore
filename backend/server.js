@@ -19,10 +19,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Import stripe route
+const stripeRoutes = require('./routes/stripeRoutes');
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/stripe', stripeRoutes);
 
 // Base route
 app.get('/', (req, res) => {
