@@ -24,8 +24,8 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   const handleSearch = (e) => {
