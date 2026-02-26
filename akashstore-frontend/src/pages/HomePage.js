@@ -23,8 +23,8 @@ const HomePage = () => {
     }
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchProducts();
   }, [category]);
 
