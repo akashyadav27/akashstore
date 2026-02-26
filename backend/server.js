@@ -12,7 +12,13 @@ const stripeRoutes = require('./routes/stripeRoutes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://akashstore.vercel.app',
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
