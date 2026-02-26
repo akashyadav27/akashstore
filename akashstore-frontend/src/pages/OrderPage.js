@@ -7,7 +7,7 @@ import { getOrderById } from '../utils/api';
 import StripePayment from '../components/StripePayment';
 
 // Put your Stripe publishable key here
-const stripePromise = loadStripe('pk_test_51T4eLmRufZTchoIVa9iBMOueVXxeelJStsZGGBy0zpcqrfIXZcOHqiDB5fYn7nsMPtsH77R6Cp74aO2vbIqO9Hs000NrFjeQIa');
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const OrderPage = () => {
   const { id } = useParams();
@@ -27,7 +27,7 @@ const OrderPage = () => {
         if (!data.isPaid) {
           const userInfo = JSON.parse(localStorage.getItem('userInfo'));
           const { data: paymentData } = await axios.post(
-            'http://localhost:5000/api/stripe/create-payment-intent',
+            `${process.env.REACT_APP_API_URL}/stripe/create-payment-intent`,
             { orderId: id },
             {
               headers: {
