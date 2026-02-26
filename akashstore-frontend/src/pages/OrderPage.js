@@ -44,7 +44,8 @@ const OrderPage = () => {
       }
     };
 
-    fetchOrder();
+   fetchOrder();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handlePaymentSuccess = async () => {
