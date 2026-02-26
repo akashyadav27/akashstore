@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
-const User = require('./user');
 
-const Order = sequelize.define('order', {
+const Order = sequelize.define('Order', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -38,12 +37,13 @@ const Order = sequelize.define('order', {
   deliveredAt: {
     type: DataTypes.DATE,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
 }, {
   timestamps: true,
+  tableName: 'orders',
 });
-
-// One user can have many orders
-User.hasMany(Order, { foreignKey: 'userId' });
-Order.belongsTo(User, { foreignKey: 'userId' });
 
 module.exports = Order;
