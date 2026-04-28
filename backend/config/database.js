@@ -7,9 +7,19 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 3306, // ← Railway uses 27262
+    port: process.env.DB_PORT || 3306,
     dialect: 'mysql',
     logging: false,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 60000,
+      idle: 10000,
+    },
+    dialectOptions: {
+      connectTimeout: 60000,
+      keepAlive: true,
+    },
   }
 );
 
