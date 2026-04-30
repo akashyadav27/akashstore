@@ -18,18 +18,28 @@ const sequelize = new Sequelize(
     },
     dialectOptions: {
       connectTimeout: 60000,
-      keepAlive: true,
     },
   }
 );
 
 const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('✅ MySQL Connected Successfully!');
-  } catch (error) {
-    console.error('❌ Database connection failed:', error.message);
-    process.exit(1);
+  let retries = 5;
+  while (retries) {
+    try {
+      await sequelize.authenticate();
+      console.log('✅ MySQL Connected Successfully!');
+      return;
+    } catch (error) {
+      retries -= 1;
+      console.log(`⚠️ Connection failed. Retries left: ${retries}`);
+      console.log('Error:', error.message);
+      if (retries === 0) {
+        console.error('❌ Database connection failed after all retries');
+        process.exit(1);
+      }
+      // Wait 5 seconds before retrying
+      await new Promise((res) => setTimeout(res, 5000));
+    }
   }
 };
 
